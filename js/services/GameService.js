@@ -3,20 +3,35 @@
 // ----------------------------------------
 
 Othello.factory('GameService',
-  ['_', 'BoardService', 'PlayerService',
-  function(_, BoardService, PlayerService) {
+  ['_', 'BoardService', 'PlayerService', 'DiskService',
+  function(_, BoardService, PlayerService, DiskService) {
 
-    var _board = BoardService.create();
-    var _squares = _.flatten(_board.grid);
-    var _players = PlayerService.createPlayers({ board: _board });
-
-
-    return {
-      game: {
-        squares: _squares,
-        players: _players
-      }
+    var _toggleCurrentPlayer = function(game) {
+      return function() {
+        game.currentPlayer = (game.currentPlayer.color == DiskService.WHITE) ?
+          game.players.black :
+          game.players.white
+        ;
+      };
     };
+
+
+    var GameService = {};
+
+
+    GameService.create = function() {
+      var game = {
+        board: BoardService.create()
+      };
+      game.squares = _.flatten(game.board.grid);
+      game.players = PlayerService.createPlayers({ game: game });
+      game.currentPlayer = game.players.black;
+      game.toggleCurrentPlayer = _toggleCurrentPlayer(game);
+      return game;
+    };
+
+
+    return GameService;
 
   }]);
 

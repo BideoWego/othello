@@ -12,13 +12,13 @@ Othello.factory('DiskService',
 
     var _isWhite = function(disk) {
       return function() {
-        return disk.value === DiskService.WHITE;
+        return disk.color === DiskService.WHITE;
       }
     };
 
     var _isBlack = function(disk) {
       return function() {
-        return disk.value === DiskService.BLACK;
+        return disk.color === DiskService.BLACK;
       }
     };
 
@@ -30,20 +30,20 @@ Othello.factory('DiskService',
       return {
         x: a,
         y: b,
-        value: c
+        color: c
       }
     };
 
     var _flip = function(disk) {
       return function() {
-        disk = (disk.value === DiskService.WHITE) ? DiskService.BLACK : DiskService.WHITE;
+        disk = (disk.color === DiskService.WHITE) ? DiskService.BLACK : DiskService.WHITE;
       };
     };
 
     DiskService.create = function(a, b, c) {
       var options = resolveCreateOptions(a, b, c);
       return {
-        value: options.value,
+        color: options.color,
         x: options.x,
         y: options.y,
         flip: _flip(this),

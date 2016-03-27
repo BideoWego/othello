@@ -15,15 +15,16 @@ Othello.factory('PlayerService',
 
       return {
         color: a,
-        board: b
+        game: b
       }
     };
 
 
     var _move = function(player) {
       return function(x, y) {
-        var disk = player.board.grid[x][y];
-        disk.value = player.color;
+        var disk = player.game.board.grid[x][y];
+        disk.color = player.color;
+        player.game.toggleCurrentPlayer();
       };
     };
 
@@ -32,7 +33,7 @@ Othello.factory('PlayerService',
       var options = _resolveCreateOptions(a, b);
       var player = {
         color: options.color,
-        board: options.board,
+        game: options.game,
         score: 0
       };
       player.move = _move(player);
@@ -41,12 +42,12 @@ Othello.factory('PlayerService',
 
 
     PlayerService.createWhite = function(options) {
-      return this.create(DiskService.WHITE, options.board);
+      return this.create(DiskService.WHITE, options.game);
     };
 
 
     PlayerService.createBlack = function(options) {
-      return this.create(DiskService.BLACK, options.board);
+      return this.create(DiskService.BLACK, options.game);
     };
 
 

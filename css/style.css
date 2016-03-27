@@ -18,6 +18,33 @@
   height: 12.5%;
 }
 
+.square.white .disk {
+  background: #fff;
+  border-bottom: 4px solid #000;
+}
+.square.black .disk {
+  background: #000;
+  border-bottom: 4px solid #fff;
+}
+
+.disk {
+  border-radius: 50%;
+  width: 100%;
+  height: 100%;
+}
+
+.square.black:hover .disk {
+  background: #fff;
+  border-color: #000;
+}
+.square.white:hover .disk {
+  background: #000;
+  border-color: #fff;
+}
+.square:hover .disk {
+  -webkit-transition: background 500ms ease-in-out;
+}
+
 .square:nth-child(1) {
   border-top-left-radius: 20%;
 }
@@ -29,6 +56,12 @@
 }
 .square:nth-child(64) {
   border-bottom-right-radius: 20%;
+}
+
+.score {
+  width: 50%;
+  cursor: pointer;
+  display: block;
 }
 
 
