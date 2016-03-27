@@ -1,0 +1,56 @@
+/*
+  Style
+*/
+
+
+.board {
+  margin: 0 auto;
+  width: 768px;
+  height: 768px;
+  background: #5FA64B;
+  border-radius: 2.5%;
+}
+
+.square {
+  float: left;
+  border: 1px solid #111;
+  width: 12.5%;
+  height: 12.5%;
+}
+
+.square:nth-child(1) {
+  border-top-left-radius: 20%;
+}
+.square:nth-child(8) {
+  border-top-right-radius: 20%;
+}
+.square:nth-child(57) {
+  border-bottom-left-radius: 20%;
+}
+.square:nth-child(64) {
+  border-bottom-right-radius: 20%;
+}
+
+
+@media only screen and (max-width: 767px) {
+  .board {
+    width: 480px;
+    height: 480px;
+  }
+}
+
+@media only screen and (max-width: 479px) {
+  .board {
+    width: 320px;
+    height: 320px;
+  }
+}
+
+@media only screen and (max-width: 319px) {
+  .board {
+    width: 256px;
+    height: 256px;
+  }
+}
+
+

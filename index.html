@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html ng-app="Othello" ng-controller="GamesCtrl">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Othello</title>
+
+    <!-- Angular -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+
+    <!-- Underscore -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore.js"></script>
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+    <!-- Bootstrap JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+    <!-- My Styles -->
+    <link rel="stylesheet" href="/css/style.css">
+  </head>
+  <body>
+
+    <!-- Main Container -->
+    <main class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          
+          <!-- Header -->
+          <header class="page-header text-center">
+            <h1>Othello</h1>
+          </header>
+
+          <!-- Flash -->
+          <div flash></div>
+
+          <!-- Game -->
+          <div class="board clearfix">
+            <div class="square" ng-repeat="square in game.squares" ng-attr-data-x="square.x" ng-attr-data-y="square.y">{{ square | json }}</div>
+          </div>
+
+        </div>
+      </div>
+    </main>
+
+    <!-- App -->
+    <script src="/js/app.js"></script>
+
+    <!-- Directives -->
+    <script src="/js/directives/flashDirective.js"></script>
+
+    <!-- Services -->
+    <script src="/js/services/FlashService.js"></script>
+    <script src="/js/services/DiskService.js"></script>
+    <script src="/js/services/PlayerService.js"></script>
+    <script src="/js/services/BoardService.js"></script>
+    <script src="/js/services/GameService.js"></script>
+
+    <!-- Controllers -->
+    <script src="/js/controllers/GamesCtrl.js"></script>
+  </body>
+</html>
+
