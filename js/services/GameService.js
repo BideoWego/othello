@@ -6,15 +6,23 @@ Othello.factory('GameService',
   ['_', 'BoardService', 'PlayerService', 'DiskService',
   function(_, BoardService, PlayerService, DiskService) {
 
+    // ----------------------------------------
+    // Private
+    // ----------------------------------------
+
     var _toggleCurrentPlayer = function(game) {
       return function() {
-        game.currentPlayer = (game.currentPlayer.color == DiskService.WHITE) ?
+        game.currentPlayer = (game.currentPlayer.color === DiskService.WHITE) ?
           game.players.black :
           game.players.white
         ;
       };
     };
 
+
+    // ----------------------------------------
+    // Public
+    // ----------------------------------------
 
     var GameService = {};
 

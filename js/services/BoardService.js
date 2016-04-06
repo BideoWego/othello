@@ -6,10 +6,13 @@ Othello.factory('BoardService',
   ['_', 'DiskService',
   function(_, DiskService) {
 
-    var BoardService = {};
+    // ----------------------------------------
+    // Private
+    // ----------------------------------------
 
-    BoardService.WIDTH = 8;
-    BoardService.HEIGHT = 8;
+    var WIDTH = 8;
+    var HEIGHT = 8;
+
 
     var _startPositions = {
       "3": {
@@ -22,6 +25,7 @@ Othello.factory('BoardService',
       }
     };
 
+
     var _createDisk = function(x, y) {
       var color;
       if (_startPositions[y] && _startPositions[y][x]) {
@@ -30,11 +34,12 @@ Othello.factory('BoardService',
       return DiskService.create(x, y, color);
     };
 
+
     var _createGrid = function() {
       var grid = [];
-      for (var x = 0; x < BoardService.WIDTH; x++) {
+      for (var x = 0; x < WIDTH; x++) {
         var row = [];
-        for (var y = 0; y < BoardService.HEIGHT; y++) {
+        for (var y = 0; y < HEIGHT; y++) {
           var disk = _createDisk(x, y);
           row.push(disk);
         }
@@ -43,13 +48,23 @@ Othello.factory('BoardService',
       return grid;
     };
 
+
+    // ----------------------------------------
+    // Public
+    // ----------------------------------------
+
+    var BoardService = {};
+
+
     BoardService.create = function() {
-      return {
+      var board = {
         grid: _createGrid(),
-        width: this.WIDTH,
-        height: this.HEIGHT
+        width: WIDTH,
+        height: HEIGHT
       };
+      return board;
     };
+
 
     return BoardService;
 

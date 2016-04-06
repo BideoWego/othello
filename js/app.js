@@ -2,10 +2,10 @@
 // Othello
 // ----------------------------------------
 
-
 var Othello = angular.module('Othello', []);
 
 
+// ----------------------------------------
 // Dependencies
 // ----------------------------------------
 
@@ -15,6 +15,7 @@ Othello.factory('_',
   }]);
 
 
+// ----------------------------------------
 // Filters
 // ----------------------------------------
 
@@ -33,14 +34,17 @@ Othello.filter('isEmpty',
   }]);
 
 
-Othello.run(function($rootScope, FlashService) {
+// ----------------------------------------
+// Helper Functions
+// ----------------------------------------
+
+
+Othello.run(function($rootScope) {
   $rootScope.times = function(n) {
     var a = [];
     var i = 0;
     while( a.push(i++) < n) { }
     return a;
   };
-
-  FlashService.init();
 });
 

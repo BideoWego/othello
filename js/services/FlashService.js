@@ -1,25 +1,28 @@
 // ----------------------------------------
 // FlashService
 // ----------------------------------------
-// Flash messages available on the $rootScope
+// Usage:
+//  1. Inject FlashService into your controller
+//  2. Bind to $scope
+//      $scope.flash = FlashService;
+//        or
+//      Use internally as FlashService
+//  3. Use in your view or controller
+//      $scope.create('Hello!');
+//      <a href="" ng-click="flash.create('Hello!')">Greet</a>
 // 
 // May be created or destroyed via
-//  $scope.flash.create()
-//  $scope.flash.destroy()
+//  $scope.flash.create(typeOrMessage, [message if type specified])
+//  $scope.flash.destroy(type, index)
 // 
 // Messages are available via
-//  $scope.flash.alerts
+//  $scope.flash.alerts[alertType]
 
 Othello.factory('FlashService',
-  ['_', '$rootScope',
-  function(_, $rootScope) {
+  ['_',
+  function(_) {
 
-    // Initialize return value
     // ----------------------------------------
-
-    var FlashService = {};
-
-
     // Private
     // ----------------------------------------
 
@@ -27,6 +30,7 @@ Othello.factory('FlashService',
       'success',
       'notice',
       'info',
+      'warn',
       'warning',
       'danger',
       'error'
@@ -36,14 +40,15 @@ Othello.factory('FlashService',
     var _resolveType = function(type) {
       return {
         notice: 'info',
-        error: 'danger'
+        error: 'danger',
+        warn: 'warning'
       }[type] || type;
     };
 
 
     var _createTypeIfNotExists = function(type) {
-      if (FlashService.alerts[type] === undefined) {
-        FlashService.alerts[type] = [];
+      if (_alerts[type] === undefined) {
+        _alerts[type] = [];
       }
     };
 
@@ -66,42 +71,43 @@ Othello.factory('FlashService',
     };
 
 
+    var _alerts = {};
+
+
+    // ----------------------------------------
     // Public
     // ----------------------------------------
 
-    FlashService.alerts = {};
+    var FlashService = {
+      length: 0,
+      alerts: _alerts,
 
+      create: function(a, b) {
+        var options = _resolveCreateOptions(a, b),
+            type = options.type,
+            message = options.message;
+        type = _resolveType(type);
+        _createTypeIfNotExists(type);
+        _alerts[type].push(message);
+        this.length++;
+        return this;
+      },
 
-    FlashService.create = function(a, b) {
-      var options = _resolveCreateOptions(a, b),
-          type = options.type,
-          message = options.message;
-      type = _resolveType(type);
-      _createTypeIfNotExists(type);
-      FlashService.alerts[type].push(message);
-      console.log(FlashService.alerts);
-    };
-
-
-    FlashService.destroy = function(type, id) {
-      type = _resolveType(type);
-      FlashService.alerts[type].splice(id, 1);
-      console.log(FlashService.alerts);
-    };
-
-
-    FlashService.init = function() {
-      $rootScope.flash = {
-        alerts: FlashService.alerts,
-        create: FlashService.create,
-        destroy: FlashService.destroy
-      };
+      destroy: function(type, id) {
+        type = _resolveType(type);
+        _alerts[type].splice(id, 1);
+        this.length--;
+        return this;
+      }
     };
 
 
     return FlashService;
 
   }]);
+
+
+
 
 
 

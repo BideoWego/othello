@@ -6,20 +6,23 @@ Othello.factory('DiskService',
   ['_',
   function(_) {
 
-    var DiskService = {};
-    DiskService.WHITE = 'white';
-    DiskService.BLACK = 'black';
+    // ----------------------------------------
+    // Private
+    // ----------------------------------------
+    
+    var WHITE = 'white';
+    var BLACK = 'black';
 
     var _isWhite = function(disk) {
       return function() {
-        return disk.color === DiskService.WHITE;
-      }
+        return disk.color === WHITE;
+      };
     };
 
     var _isBlack = function(disk) {
       return function() {
-        return disk.color === DiskService.BLACK;
-      }
+        return disk.color === BLACK;
+      };
     };
 
     var resolveCreateOptions = function(a, b, c) {
@@ -31,14 +34,24 @@ Othello.factory('DiskService',
         x: a,
         y: b,
         color: c
-      }
+      };
     };
 
     var _flip = function(disk) {
       return function() {
-        disk = (disk.color === DiskService.WHITE) ? DiskService.BLACK : DiskService.WHITE;
+        disk = (disk.color === WHITE) ? BLACK : WHITE;
       };
     };
+
+    // ----------------------------------------
+    // Public
+    // ----------------------------------------
+
+    var DiskService = {
+      WHITE: WHITE,
+      BLACK: BLACK
+    };
+
 
     DiskService.create = function(a, b, c) {
       var options = resolveCreateOptions(a, b, c);

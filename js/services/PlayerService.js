@@ -6,7 +6,9 @@ Othello.factory('PlayerService',
   ['_', 'DiskService',
   function(_, DiskService) {
 
-    var PlayerService = {};
+    // ----------------------------------------
+    // Private
+    // ----------------------------------------
 
     var _resolveCreateOptions = function(a, b) {
       if (_.isObject(a)) {
@@ -16,7 +18,7 @@ Othello.factory('PlayerService',
       return {
         color: a,
         game: b
-      }
+      };
     };
 
 
@@ -27,6 +29,12 @@ Othello.factory('PlayerService',
         player.game.toggleCurrentPlayer();
       };
     };
+
+    // ----------------------------------------
+    // Public
+    // ----------------------------------------
+
+    var PlayerService = {};
 
 
     PlayerService.create = function(a, b) {
