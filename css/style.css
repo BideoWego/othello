@@ -33,6 +33,13 @@
   height: 100%;
 }
 
+.player.active {
+  font-size: 32px;
+  color: #2EA629;
+  text-decoration: underline;
+}
+
+/*
 .square.black:hover .disk {
   background: #fff;
   border-color: #000;
@@ -44,6 +51,7 @@
 .square:hover .disk {
   -webkit-transition: background 500ms ease-in-out;
 }
+*/
 
 .square:nth-child(1) {
   border-top-left-radius: 20%;

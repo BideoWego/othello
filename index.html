@@ -34,30 +34,41 @@
           <!-- Header -->
           <header id="main-header" class="page-header text-center">
             <h1>Othello</h1>
+            <a href="" class="btn btn-success btn-lg" ng-click="play(1)" ng-hide="playing">1 Player</a>
+            <a href="" class="btn btn-success btn-lg" ng-click="play(2)" ng-hide="playing">2 Player</a>
           </header>
 
           <div class="row">
             <div class="col-xs-12 clearfix text-center">
-              <h1 class="score white pull-left"><small>White: 0</small></h1>
-              <h1 class="score black pull-right"><small>Black: 0</small></h1>
+              <h1 class="score white pull-left">
+                <small class="player" ng-class="{ active: game.isTurnWhite }">
+                  White: <span>{{ game.players.white.score }}</span>
+                </small>
+              </h1>
+              <h1 class="score black pull-right">
+                <small class="player" ng-class="{ active: game.isTurnBlack }">
+                  Black: <span>{{ game.players.black.score }}</span>
+                </small>
+              </h1>
             </div>
           </div>
 
-          <!-- Flash -->
-          <div flash="flash"></div>
-
           <!-- Game -->
-          <div class="board clearfix">
+          <div class="board clearfix" ng-if="game">
             <a class="square"
                href=""
                ng-repeat="square in game.squares"
                ng-class="square.color"
                ng-attr-data-x="square.x"
                ng-attr-data-y="square.y"
-               ng-click="game.currentPlayer.move(square.x, square.y)">
-              <div class="disk">{{ square | json }}</div>
+               ng-click="move(square.x, square.y)">
+              <div class="disk"></div>
             </a>
           </div>
+
+          <br>
+          <!-- Flash -->
+          <div flash="flash"></div>
 
         </div>
       </div>

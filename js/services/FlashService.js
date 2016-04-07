@@ -102,6 +102,12 @@ Othello.factory('FlashService',
         _alerts[type].splice(id, 1);
         this.length--;
         return this;
+      },
+
+      clear: function() {
+        _.each(_alerts, function(value, key) {
+          _alerts[key] = [];
+        });
       }
     };
 

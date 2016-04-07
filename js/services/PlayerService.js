@@ -10,6 +10,8 @@ Othello.factory('PlayerService',
     // Private
     // ----------------------------------------
 
+    var _moves = [];
+
     var _resolveCreateOptions = function(a, b) {
       if (_.isObject(a)) {
         return a;
@@ -22,10 +24,21 @@ Othello.factory('PlayerService',
     };
 
 
+    var _hasMoves = function(player) {
+      return function() {
+        var moves = player.game.board.possibleMovesFor(player.color);
+        _moves.splice(0);
+        _.each(moves, function(move) {
+          _moves.push(move);
+        });
+        return !!_moves.length;
+      };
+    };
+
+
     var _move = function(player) {
       return function(x, y) {
-        var disk = player.game.board.grid[x][y];
-        disk.color = player.color;
+        player.game.placeDiskAt(x, y);
         player.game.toggleCurrentPlayer();
       };
     };
@@ -42,9 +55,12 @@ Othello.factory('PlayerService',
       var player = {
         color: options.color,
         game: options.game,
-        score: 0
+        score: 2,
+        moves: _moves,
+        isComputer: false
       };
       player.move = _move(player);
+      player.hasMoves = _hasMoves(player);
       return player;
     };
 
