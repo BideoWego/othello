@@ -1,6 +1,6 @@
 # Othello
 
-AngularJS version of the popular game.
+AngularJS version of the [popular game](https://en.wikipedia.org/wiki/Reversi).
 
-## [Bideo Wego](https://github.com/BideoWego)
+## by [Bideo Wego](https://github.com/BideoWego)
 
