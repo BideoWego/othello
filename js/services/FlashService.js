@@ -88,8 +88,12 @@ Othello.factory('FlashService',
             message = options.message;
         type = _resolveType(type);
         _createTypeIfNotExists(type);
-        _alerts[type].push(message);
-        this.length++;
+        if (!_.find(_alerts[type], function(alert) {
+          return alert === message;
+        })) {
+          _alerts[type].push(message);
+          this.length++;
+        }
         return this;
       },
 

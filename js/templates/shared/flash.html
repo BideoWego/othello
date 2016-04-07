@@ -1,4 +1,4 @@
-<div id="flash" ng-if="flash.length">
+<div id="flash" ng-if="flash.length" class="text-center">
   <div class="alerts" ng-repeat="(key, messages) in flash.alerts">
     <div class="alert alert-dismissible" role="alert" ng-repeat="message in messages" ng-class="'alert-' + key">
       <button type="button" class="close" data-dismiss="alert" aria-label="Close" ng-click="flash.destroy(key, $index)">
