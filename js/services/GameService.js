@@ -42,9 +42,10 @@ Othello.factory('GameService',
     var _placeDiskAt = function(game) {
       return function(x, y) {
         var disk = game.board.grid[x][y];
-        disk.color = game.currentPlayer.color;
+        var color = game.currentPlayer.color;
+        disk.color = color;
         _.each(_flippables, function(disk) {
-          disk.color = game.currentPlayer.color;
+          disk.color = color;
         });
         game.setScores();
       };
