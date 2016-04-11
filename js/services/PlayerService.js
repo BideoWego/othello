@@ -39,7 +39,6 @@ Othello.factory('PlayerService',
     var _move = function(player) {
       return function(x, y) {
         player.game.placeDiskAt(x, y);
-        player.game.toggleCurrentPlayer();
       };
     };
 

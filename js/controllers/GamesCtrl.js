@@ -32,6 +32,7 @@ Othello.controller('GamesCtrl',
       $scope.flash.clear();
       if ($scope.game.isValidMove(x, y)) {
         $scope.game.currentPlayer.move(x, y);
+        $scope.game.toggleCurrentPlayer();
       } else {
         $scope.flash.create('error', 'Invalid Move!');
       }
@@ -40,28 +41,32 @@ Othello.controller('GamesCtrl',
 
 
     var _checkCurrentPlayerHasMoves = function() {
-      if (!$scope.game.currentPlayer.hasMoves()) {
-        var color = $scope.game.currentPlayer.color;
-        $scope.flash.create('No moves available for player: ' + color);
-        $scope.game.toggleCurrentPlayer();
-        _checkGameOver();
-      } else if ($scope.game.currentPlayer.isComputer) {
-        _moveComputer();
+      if ($scope.game.currentPlayer.hasMoves()) {
+        if ($scope.game.currentPlayer.isComputer) {
+          _moveComputer();
+        }
+      } else {
+        if ($scope.game.isGameOver()) {
+          _gameOver();
+        } else {
+          var color = $scope.game.currentPlayer.color;
+          $scope.flash.create('No moves available for player: ' + color);
+          $scope.game.toggleCurrentPlayer();
+          _checkCurrentPlayerHasMoves();
+        }
       }
     };
 
 
-    var _checkGameOver = function() {
-      if (!$scope.game.currentPlayer.hasMoves()) {
-        $scope.playing = false;
-        $scope.flash.clear();
-        $scope.flash.create('Game Over!');
-        var message = ($scope.game.isTie()) ?
-          'Tie Game!' :
-          'The winner is: ' + $scope.game.getWinner().color
-        ;
-        $scope.flash.create('success', message);
-      }
+    var _gameOver = function() {
+      $scope.playing = false;
+      $scope.flash.clear();
+      $scope.flash.create('Game Over!');
+      var message = ($scope.game.isTie()) ?
+        'Tie Game!' :
+        'The winner is: ' + $scope.game.getWinner().color
+      ;
+      $scope.flash.create('success', message);
     };
 
 

@@ -78,6 +78,14 @@ Othello.factory('GameService',
     };
 
 
+    var _isGameOver = function(game) {
+      return function() {
+        return !game.players.white.hasMoves() &&
+               !game.players.black.hasMoves();
+      };
+    };
+
+
     // ----------------------------------------
     // Public
     // ----------------------------------------
@@ -105,6 +113,8 @@ Othello.factory('GameService',
       game.setScores = _setScores(game);
       game.getWinner = _getWinner(game);
       game.isTie = _isTie(game);
+      game.isGameOver = _isGameOver(game);
+      game.playersWithoutMoves = 0;
       return game;
     };
 
