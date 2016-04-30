@@ -38,7 +38,9 @@
             <a href="" class="btn btn-success btn-lg" ng-click="play(2)" ng-hide="playing">2 Player</a>
           </header>
 
-          <div class="row">
+          <h2 class="text-center" ng-hide="game">Select a number of players to start the game!</h2>
+
+          <div class="row" ng-if="game">
             <div class="col-xs-12 clearfix text-center">
               <h1 class="score white pull-left">
                 <small class="player" ng-class="{ active: game.isTurnWhite }">
